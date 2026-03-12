@@ -1,0 +1,122 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Wireless Noise-Cancelling Headphones",
+      "price": 299.99,
+      "cost": 180.00,
+      "stock": 45,
+      "category": "Electronics",
+      "brand": "SoundMaster",
+      "sku": "SM-HP-001",
+      "description": "Premium wireless headphones with active noise cancellation",
+      "images": ["headphone-1.jpg", "headphone-2.jpg"],
+      "rating": 4.5,
+      "reviews": 128,
+      "isActive": true,
+      "createdAt": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": "2",
+      "name": "Cotton Casual T-Shirt",
+      "price": 29.99,
+      "cost": 12.50,
+      "stock": 200,
+      "category": "Apparel",
+      "brand": "FashionBasic",
+      "sku": "FB-TS-042",
+      "description": "Comfortable 100% cotton t-shirt, available in multiple colors",
+      "images": ["tshirt-1.jpg"],
+      "rating": 4.2,
+      "reviews": 89,
+      "isActive": true,
+      "createdAt": "2024-02-03T14:20:00Z"
+    }
+  ],
+  
+  "orders": [
+    {
+      "id": "1001",
+      "customerId": "c001",
+      "customerName": "John Smith",
+      "customerEmail": "john@example.com",
+      "items": [
+        {
+          "productId": "1",
+          "productName": "Wireless Headphones",
+          "quantity": 1,
+          "price": 299.99
+        }
+      ],
+      "totalAmount": 299.99,
+      "status": "delivered",
+      "paymentMethod": "credit_card",
+      "shippingAddress": "123 Main St, New York, NY 10001",
+      "orderDate": "2024-03-01T09:15:00Z",
+      "deliveryDate": "2024-03-05T14:30:00Z"
+    }
+  ],
+  
+  "customers": [
+    {
+      "id": "c001",
+      "name": "John Smith",
+      "email": "john@example.com",
+      "phone": "+1-555-0123",
+      "totalOrders": 5,
+      "totalSpent": 1249.95,
+      "joinDate": "2023-11-10T08:00:00Z",
+      "lastLogin": "2024-03-10T19:45:00Z",
+      "status": "active"
+    }
+  ],
+  
+  "categories": [
+    {
+      "id": "cat001",
+      "name": "Electronics",
+      "slug": "electronics",
+      "productCount": 45,
+      "image": "electronics-cat.jpg"
+    },
+    {
+      "id": "cat002",
+      "name": "Apparel",
+      "slug": "apparel",
+      "productCount": 120,
+      "image": "apparel-cat.jpg"
+    }
+  ],
+  
+  "inventory": [
+    {
+      "productId": "1",
+      "warehouse": "Main Warehouse",
+      "quantity": 45,
+      "lowStockThreshold": 10,
+      "lastRestocked": "2024-03-01T11:00:00Z"
+    }
+  ],
+  
+  "sales": [
+    {
+      "id": "s001",
+      "productId": "1",
+      "productName": "Wireless Headphones",
+      "quantity": 15,
+      "revenue": 4499.85,
+      "date": "2024-03-15T00:00:00Z"
+    }
+  ],
+  
+  "reviews": [
+    {
+      "id": "r001",
+      "productId": "1",
+      "customerId": "c001",
+      "rating": 5,
+      "comment": "Excellent sound quality!",
+      "date": "2024-03-05T16:20:00Z"
+    }
+  ]
+}
