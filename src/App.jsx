@@ -1,16 +1,20 @@
 import { Suspense } from "react"
-import { BrowserRouter } from "react-router-dom"
 import { Loader } from "./components/loader/Loader"
-import { AppRouter } from "./routes/AppRouter"
+import { AppRouter } from "./routes/AppRouter.jsx"
+import { BrowserRouter } from "react-router-dom"
+import { AppProviders } from "./providers/AppProviders.jsx"
 
 
 function App() {
-
   return (
     <>
-     <BrowserRouter>
-        <AppRouter />
+    <AppProviders>
+      <BrowserRouter>
+        <Suspense fallback={<Loader />}>
+          <AppRouter />
+        </Suspense>
       </BrowserRouter>
+    </AppProviders>
     </>
   )
 }

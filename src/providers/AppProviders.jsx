@@ -1,5 +1,4 @@
 import { AuthProvider } from "../context/AuthContext"
-import { SidebarProvider } from "../context/SidebarContext"
 import { ThemeProvider } from "../context/ThemeContext"
 
 export const AppProviders = ({ children }) => {
@@ -7,9 +6,7 @@ export const AppProviders = ({ children }) => {
         // WRAPPING THE PROVIDERS TO USE THEM 
         <AuthProvider>
             <ThemeProvider>
-                <SidebarProvider>
-                    {children}
-                </SidebarProvider>
+            {children}
             </ThemeProvider>
         </AuthProvider>
     )

@@ -1,8 +1,10 @@
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, BarChart3, Settings, User, Users, ShoppingBag } from "lucide-react";
 import { DashboardLayout } from "../layout/DashboardLayout";
 import { MainLayout } from "../layout/MainLayout";
 import { Login } from "../pages/auth/Login";
 import { Register } from "../pages/auth/Register";
+import { Products } from "../pages/products/Products";
+import { lazy } from "react";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 
 export const routeConfig = [
@@ -33,10 +35,19 @@ export const routeConfig = [
         element: <Dashboard />,
         meta: {
           title: "Dashboard",
-          icon: <LayoutDashboard />,
+          icon: <LayoutDashboard size={14} />,
           roles: ["admin", "editor"]
         }
+      },
+     {
+      path: "products",
+      element: <Products />,
+      meta: {
+        title: "Products",
+        icon: <ShoppingBag size={14} />,
+        roles: ["admin"]
       }
+     }
     ]
   }
-]
+];

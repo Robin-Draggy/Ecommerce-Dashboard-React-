@@ -11,8 +11,6 @@ export const AuthProvider = ({ children }) => {
             role: "admin"
         });
 
-        console.log(user)
-
     const login = () => {
         const fakeUser = {
             name: "rasel",

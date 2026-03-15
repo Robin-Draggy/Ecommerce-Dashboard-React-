@@ -1,29 +1,29 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const ThemeContext = createContext();
 
-
-// CREATING PROVIDER
-export const ThemeProvider = ({children}) => {
+export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState("light");
 
-    const toggleTheme = () => {
-        setTheme((prev) => ( prev === "light" ? "dark" : "light" ))
-    }
+    useEffect(() => {
+        const root = document.documentElement;
 
-    const value = {
-        theme,
-        toggleTheme
-    }
+        if (theme === "dark") {
+            root.classList.add("dark");
+        } else {
+            root.classList.remove("dark");
+        }
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    };
 
     return (
-        <ThemeContext.Provider value={value}>
+        <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
         </ThemeContext.Provider>
-    )
-}
+    );
+};
 
-// CUSTOM HOOK
-export const UseTheme = () => {
-    return useContext(ThemeContext)
-}
+export const useTheme = () => useContext(ThemeContext);

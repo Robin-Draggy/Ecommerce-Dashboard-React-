@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export const Login = () => {
-    const { login } = useAuth();
+    const { user, login } = useAuth();
     const navigate = useNavigate();
+
 
     const handleLogin = () => {
         login();
@@ -11,10 +12,10 @@ export const Login = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-red-400">
+        <div className="min-h-screen flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md">
                 <h1 className="text-2xl mb-4">Login Page</h1>
-                <button 
+                <button
                     onClick={handleLogin}
                     className="bg-blue-500 text-white px-4 py-2 rounded"
                 >

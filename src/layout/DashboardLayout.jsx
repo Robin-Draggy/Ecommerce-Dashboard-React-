@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom"
 import { Sidebar } from "../components/sidebar/Sidebar"
+import { Navbar } from "../components/navbar/Navbar"
 
 export const DashboardLayout = () => {
     return (
-    <div className="min-h-screen flex bg-red-500">
-        <h1>dashboard</h1>
-        <Sidebar />
-        <main className="flex-1 p-4">
-            <Outlet />
-        </main>
-    </div>
-)
+        <div className="min-h-screen flex flex-col gap-3 p-3">
+            <Navbar />
+            <div className="flex items-start gap-3">
+                <Sidebar />
+                <main className="w-full">
+                    <Outlet />
+                </main>
+            </div>
+        </div>
+    )
 }
