@@ -27,7 +27,7 @@ export const Sidebar = () => {
             end={route.index}
             className={({ isActive }) =>
               `block rounded-md p-2 transition-all ${
-                isActive ? "bg-blue-800 text-white" : "text-cl-primary hover:bg-gray-100"
+                isActive ? "bg-sidebar-cl text-cl-primary" : "text-cl-primary hover:bg-sidebar-cl hover:text-cl-hover"
               }`
             }
           >

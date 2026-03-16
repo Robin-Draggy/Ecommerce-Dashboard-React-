@@ -8,7 +8,7 @@ export const DashboardLayout = () => {
             <Navbar />
             <div className="flex items-start gap-3">
                 <Sidebar />
-                <main className="w-full">
+                <main className="w-full min-h-screen">
                     <Outlet />
                 </main>
             </div>

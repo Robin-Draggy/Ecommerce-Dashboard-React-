@@ -7,15 +7,16 @@
     font-family: "Ubuntu", sans-serif;
 
     /* LIGHT THEME */
-    --bg-primary-color: #d2d2d2;
-    --bg-secondary-color: #ffffff;
+    --bg-primary-color: #f1f2f6;
+    --bg-secondary-color: #ced6e0;
     --bg-card-color: #f8fafc;
     --bg-hover-color: #e5e7eb;
-    --bg-navbar-color: #ffffff;
-    --bg-sidebar-color: #ffffff;
+    --bg-wb-color: #ffffff;
+    --bg-sidebar-color: #434b5c;
     --border-color: #d1d5db;
 
-        --text-primary-color: #111827;
+    --text-hover-color: #113563;
+    --text-primary-color: #000000;
     --text-secondary-color: #6b7280;
 
     --text-muted-color: #9ca3af;
@@ -27,14 +28,15 @@
 .dark {
     /* DARK THEME */
     --bg-primary-color: #000000;
-    --bg-secondary-color: #121212;
+    --bg-secondary-color: #1e272e;
     --bg-card-color: #1e293b;
     --bg-hover-color: #334155;
-    --bg-navbar-color: #111827;
+    --bg-wb-color: #000000;
     --bg-sidebar-color: #111827;
     --border-color: #374151;
 
-    --text-primary-color: #f9fafb;
+    --text-hover-color: #111722;
+    --text-primary-color: #ffffff;
     --text-secondary-color: #cbd5e1;
     --text-muted-color: #94a3b8;
 
@@ -51,8 +53,16 @@ body {
     background-color: var(--bg-secondary-color);
 }
 
+.bg-sidebar-cl{
+    background-color: var(--bg-sidebar-color);
+}
+
 .text-cl-primary{
-    color: var(--text-primary-color)
+    color: var(--text-primary-color);
+}
+
+.text-cl-hover{
+    color: var(--text-hover-color);
 }
 
 .border-cl{
@@ -61,4 +71,7 @@ body {
 
 .hover-cl{
     background-color: var(--bg-hover-color);
+}
+.action{
+    background-color: var(--bg-wb-color)
 }

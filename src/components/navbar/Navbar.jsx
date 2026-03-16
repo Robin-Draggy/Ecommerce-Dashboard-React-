@@ -16,7 +16,7 @@ export const Navbar = () => {
 
             <div className='flex items-center gap-8'>
             {/* SEARCH BAR */}
-            <div className='bg-cl-primary text-cl-primary hidden md:flex items-center gap-2 px-2 py-1 shadow rounded text-gray-800'>
+            <div className='bg-cl-primary text-cl-primary hidden md:flex items-center gap-2 px-2 py-1 shadow rounded'>
                 <Search size={14} />
                 <input type="text" placeholder='search' className='focus:outline-none' />
             </div>

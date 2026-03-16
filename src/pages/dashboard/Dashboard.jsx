@@ -1,7 +1,7 @@
 import { Ellipsis, File, FolderClosed } from "lucide-react"
 import { Card } from "../../components/cards/Card"
 import { LineChartCard } from "../../components/charts/LineChartCard"
-import { DonutChartCard } from "../../components/charts/DonutChartCard"
+import { BarChartCard } from "../../components/charts/BarChartCard"
 
 export const Dashboard = () => {
     
@@ -52,7 +52,7 @@ export const Dashboard = () => {
 
             <div className="rounded-lg w-full bg-cl-primary p-2 py-2.5 mt-3">
                 <div className="grid grid-cols-2 gap-3">
-                    <DonutChartCard />
+                    <BarChartCard />
                     <LineChartCard />
                 </div>
             </div>

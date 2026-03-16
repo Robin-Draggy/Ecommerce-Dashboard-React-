@@ -22,7 +22,7 @@ const data = [
 
 export const BarChartCard = () => {
   return (
-    <div className="rounded-lg border bg-cl-primary p-4 shadow">
+    <div className="rounded-lg  bg-[#E3F5FF] p-4 shadow">
       <div className="mb-4">
         <h2 className="text-lg font-semibold text-cl-primary">
           Weekly Orders
@@ -32,7 +32,7 @@ export const BarChartCard = () => {
         </p>
       </div>
 
-      <div className="h-[80] w-full">
+      <div className="h-80 w-full">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data}>
             <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.2} />
