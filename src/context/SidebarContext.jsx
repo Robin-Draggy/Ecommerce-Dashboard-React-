@@ -1,10 +1,24 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const SidebarContext = createContext();
 
+const MOBILE_BREAKPOINT = 768;
+
 // CRAETING PROVIDER
-export const SidebarProvider = ({chilldren}) => {
+export const SidebarProvider = ({children}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
     const toggleSidebar = () => {
         setIsOpen((prev) => !prev)
@@ -12,12 +26,13 @@ export const SidebarProvider = ({chilldren}) => {
 
     const value = {
         isOpen,
-        toggleSidebar
+        toggleSidebar,
+        isMobile
     }
 
     return (
         <SidebarContext.Provider value={value}>
-            {chilldren}
+            {children}
         </SidebarContext.Provider>
     )
 }
@@ -25,5 +40,5 @@ export const SidebarProvider = ({chilldren}) => {
 
 // CUSTOM HOOK
 export const useSidebar = () => {
-    return useContext(SidebarProvider)
+    return useContext(SidebarContext)
 }

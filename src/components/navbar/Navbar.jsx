@@ -1,41 +1,51 @@
-import { Bell, CircleUserRound, Drum, Moon, Search, Sun } from 'lucide-react'
-import React from 'react'
-import { useTheme } from '../../context/ThemeContext'
+import { Bell, CircleUserRound, Drum, Moon, Search, Sun, PanelLeftOpen, PanelLeftClose } from 'lucide-react';
+import React from 'react';
+import { useTheme } from '../../context/ThemeContext';
+import { useSidebar } from '../../context/SidebarContext';
 
 export const Navbar = () => {
-    const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme } = useTheme();
+  const { isOpen, toggleSidebar } = useSidebar();
 
-    return (
-        <nav className='flex items-center justify-between px-2 py-3'>
+  return (
+    <nav className='flex items-center justify-between px-2 py-3'>
+      <div className='flex items-center gap-2'>
+        {/* Sidebar toggle button – visible on all screens, but on mobile it's disabled (no effect) */}
+        <button
+          onClick={toggleSidebar}
+          className='p-2 bg-cl-primary rounded-full cursor-pointer shadow md:block'
+          aria-label="Toggle sidebar"
+        >
+          {isOpen ? <PanelLeftClose size={20} /> : <PanelLeftOpen size={20} />}
+        </button>
 
-            {/* LOGO */}
-            <div className="flex items-center gap-1 font-semibold text-xl">
-                <span> <Drum size={14} className="text-blue-800" /> </span>
-                <span className="text-blue-800">Dooddle</span>
-            </div>
+        {/* LOGO */}
+        <div className="flex items-center gap-1 font-semibold text-xl">
+          <span> <Drum size={14} className="text-blue-800" /> </span>
+          <span className="text-blue-800">Dooddle</span>
+        </div>
+      </div>
 
-            <div className='flex items-center gap-8'>
-            {/* SEARCH BAR */}
-            <div className='bg-cl-primary text-cl-primary hidden md:flex items-center gap-2 px-2 py-1 shadow rounded'>
-                <Search size={14} />
-                <input type="text" placeholder='search' className='focus:outline-none' />
-            </div>
+      <div className='flex items-center gap-8'>
+        {/* SEARCH BAR */}
+        <div className='bg-cl-primary text-cl-primary hidden md:flex items-center gap-2 px-2 py-1 shadow rounded'>
+          <Search size={14} />
+          <input type="text" placeholder='search' className='focus:outline-none' />
+        </div>
 
-            {/* OPTIONS */}
-            <div className='flex items-center gap-3'>
-                <div className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
-                    <Bell size={20} />
-                </div>
-                <button onClick={toggleTheme} className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
-                    {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-                </button>
-                <div className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
-                    <CircleUserRound size={20} />
-                </div>
-            </div>
-
-            </div>
-
-        </nav>
-    )
-}
+        {/* OPTIONS */}
+        <div className='flex items-center gap-3'>
+          <div className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
+            <Bell size={20} />
+          </div>
+          <button onClick={toggleTheme} className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
+            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
+          </button>
+          <div className='p-2 bg-cl-primary rounded-full cursor-pointer shadow'>
+            <CircleUserRound size={20} />
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};

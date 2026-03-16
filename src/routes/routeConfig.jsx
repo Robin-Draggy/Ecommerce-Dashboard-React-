@@ -41,7 +41,7 @@ export const routeConfig = [
         element: <Dashboard />,
         meta: {
           title: "Dashboard",
-          icon: <LayoutDashboard size={14} />,
+          icon: <LayoutDashboard size={20} />,
           roles: ["admin", "editor"],
           breadcrumb: "Dashboard" 
         }
@@ -51,7 +51,7 @@ export const routeConfig = [
       element: <Products />,
       meta: {
         title: "Products",
-        icon: <ShoppingBag size={14} />,
+        icon: <ShoppingBag size={20} />,
         roles: ["admin"],
         breadcrumb: "Products"
       }
@@ -61,7 +61,7 @@ export const routeConfig = [
       element: <Orders />,
       meta: {
         title: "Orders",
-        icon: <ListOrdered size={14} />,
+        icon: <ListOrdered size={20} />,
         roles: ["admin"],
         breadcrumb: "Orders"
       }
@@ -71,7 +71,7 @@ export const routeConfig = [
       element: <Customers />,
       meta: {
         title: "Customers",
-        icon: <Users size={14} />,
+        icon: <Users size={20} />,
         roles: ["admin"],
         breadcrumb: "Customers"
       }
@@ -81,7 +81,7 @@ export const routeConfig = [
       element: <Categories />,
       meta: {
         title: "Categories",
-        icon: <ClipboardType size={14} />,
+        icon: <ClipboardType size={20} />,
         roles: ["admin"],
         breadcrumb: "Categories"
       }
@@ -91,7 +91,7 @@ export const routeConfig = [
       element: <Inventory />,
       meta: {
         title: "Inventory",
-        icon: <Warehouse size={14} />,
+        icon: <Warehouse size={20} />,
         roles: ["admin"],
         breadcrumb: "Inventory"
       }
