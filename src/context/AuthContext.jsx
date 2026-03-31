@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
             role: "admin"
         }
 
+        localStorage.setItem("token", user.role)
         setUser(fakeUser);
     }
 
