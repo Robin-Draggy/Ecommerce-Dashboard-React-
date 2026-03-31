@@ -1,28 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataTable } from "../../components/data-table/DataTable"
 import { formatCurrency, getStatusBadge, formatDate } from "../../utils/formatters"
 import { TableActions } from "../../components/table/TableActions"
 import { Button } from '../../components/ui/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectProducts } from '../../store/features/products/ProductSelectors'
-import { getProducts } from '../../store/features/products/ProductSlice'
+import { getProducts, deleteProduct } from '../../store/features/products/ProductSlice'
+import { Modal } from '../../components/ui/Modal'
+import { ProductForm } from '../../components/forms/ProductForm'
+import { DeleteConfirmationModal } from '../../components/ui/DeleteConfirmationModal'
 
 export const Products = () => {
-  const dispatch = useDispatch();
-  const products = useSelector(selectProducts);
+  const [isOpen, setIsOpen] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [selectedProduct, setSelectedProduct] = useState(null)
+
+  const dispatch = useDispatch()
+  const products = useSelector(selectProducts)
 
   useEffect(() => {
     dispatch(getProducts())
   }, [dispatch])
-  
-  console.log("products", products)
 
+  // Edit product
   const handleEdit = (row) => {
-    console.log(row)
+    setSelectedProduct(row)
+    setIsOpen(true)
   }
 
-  const handleDelete = (row) => {
-    console.log(row.id)
+  // Delete click (opens modal)
+  const handleDeleteClick = (row) => {
+    setSelectedProduct(row)
+    setDeleteModalOpen(true)
+  }
+
+  // Confirm deletion
+  const handleDeleteConfirm = () => {
+    if (selectedProduct) {
+      dispatch(deleteProduct(selectedProduct.id))
+      setSelectedProduct(null)
+    }
   }
 
   const handleView = (row) => {
@@ -30,7 +47,8 @@ export const Products = () => {
   }
 
   const AddProducts = () => {
-    console.log("product added")
+    setSelectedProduct(null)
+    setIsOpen(true)
   }
 
   const columns = [
@@ -46,7 +64,7 @@ export const Products = () => {
             className="w-10 h-10 rounded object-cover border border-cl"
             onError={(e) => (e.target.src = 'https://placehold.co/40x40')}
           />
-        );
+        )
       },
     },
     { key: 'name', label: 'Product Name' },
@@ -97,11 +115,11 @@ export const Products = () => {
           row={row}
           onView={handleView}
           onEdit={handleEdit}
-          onDelete={handleDelete}
+          onDelete={handleDeleteClick} // open modal
         />
       ),
     },
-  ];
+  ]
 
   return (
     <div className="bg-cl-primary w-full min-h-screen rounded-lg p-2 space-y-4">
@@ -109,7 +127,21 @@ export const Products = () => {
         <h1 className="text-2xl">Products</h1>
         <Button onClick={AddProducts} label="Add Products" />
       </div>
+
       <DataTable data={products} columns={columns} />
+
+      {/* Product Form Modal */}
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Product">
+        <ProductForm initialData={selectedProduct} onClose={() => setIsOpen(false)} />
+      </Modal>
+
+      {/* Generic Delete Confirmation Modal */}
+      <DeleteConfirmationModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={handleDeleteConfirm}
+        entityName="product"
+      />
     </div>
   )
 }
