@@ -11,6 +11,7 @@ export const TableActions = ({ row, onEdit, onDelete, onView, customActions = []
     <div className="flex items-center gap-2">
       {onView && (
         <button
+        type='button'
           onClick={handleClick(onView)}
           className="p-2 rounded-full hover:bg-white text-cl-primary transition-colors cursor-pointer"
           title="View"
@@ -20,6 +21,7 @@ export const TableActions = ({ row, onEdit, onDelete, onView, customActions = []
       )}
       {onEdit && (
         <button
+        type='button'
           onClick={handleClick(onEdit)}
           className="p-2 rounded-full hover:bg-white text-cl-primary transition-colors cursor-pointer"
           title="Edit"
@@ -29,6 +31,7 @@ export const TableActions = ({ row, onEdit, onDelete, onView, customActions = []
       )}
       {onDelete && (
         <button
+        type='button'
           onClick={handleClick(onDelete)}
           className="p-2 rounded-full hover:bg-red-600 hover:text-white text-cl-primary transition-colors cursor-pointer"
           title="Delete"

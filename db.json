@@ -19,19 +19,18 @@
       "createdAt": "2024-01-15T10:30:00Z"
     },
     {
-      "description": "sdfsfsfsfsf",
+      "description": "this is a good headphone",
       "images": {},
       "name": "headphone",
-      "price": 500,
-      "cost": 123,
-      "stock": 33,
+      "price": 588,
+      "cost": "455",
+      "stock": 555,
       "brand": "Xiaomi",
+      "category": "Electronics",
       "sku": "SM-HP-002",
-      "rating": 3,
-      "reviews": 34,
-      "isActive": true,
-      "createdAt": "2026-03-31T19:55:53.989Z",
-      "id": "8jMUDohpSv8"
+      "rating": "3.4",
+      "reviews": "234",
+      "id": "7M1_dAB0GZ8"
     }
   ],
   "orders": [
@@ -78,11 +77,17 @@
       "image": "electronics-cat.jpg"
     },
     {
-      "id": "cat002",
-      "name": "Apparel",
-      "slug": "apparel",
-      "productCount": 120,
-      "image": "apparel-cat.jpg"
+      "image": {},
+      "description": "xiaomi is a great company",
+      "metaDescription": "",
+      "name": "Xiaomi",
+      "slug": "xiaomi",
+      "productCount": "50",
+      "isActive": true,
+      "parentCategory": "",
+      "metaTitle": "Xiaomi",
+      "sortOrder": "",
+      "id": "p_4kpExRw6o"
     }
   ],
   "inventory": [

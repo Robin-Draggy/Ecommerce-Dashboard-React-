@@ -3,7 +3,7 @@ import { Input } from "./Input";
 
 export const FormRenderer = React.memo(({ config, register, errors }) => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
       {config.map((field) => {
         // TEXTAREA
         if (field.type === "textarea") {
@@ -13,7 +13,7 @@ export const FormRenderer = React.memo(({ config, register, errors }) => {
               <textarea
                 {...register(field.name, field.validation)}
                 rows={4}
-                className={`w-full px-3 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400
+                className={`w-full px-3 py-2 border rounded-lg outline-none bg-white
                   ${errors[field.name] ? "border-red-500" : "border-gray-300"}`}
               />
               {errors[field.name] && (

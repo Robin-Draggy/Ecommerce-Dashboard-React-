@@ -5,10 +5,11 @@ import { TableActions } from "../../components/table/TableActions"
 import { Button } from '../../components/ui/Button/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectProducts } from '../../store/features/products/ProductSelectors'
-import { getProducts, deleteProduct } from '../../store/features/products/ProductSlice'
+import { getProducts, createProduct, updateProduct, deleteProduct } from '../../store/features/products/ProductSlice'
 import { Modal } from '../../components/ui/Modal'
 import { ProductForm } from '../../components/forms/ProductForm'
 import { DeleteConfirmationModal } from '../../components/ui/DeleteConfirmationModal'
+import { ProductConfigForm } from '../../config/ProductConfig'
 
 export const Products = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -29,7 +30,7 @@ export const Products = () => {
   }
 
   // Delete click (opens modal)
-  const handleDeleteClick = (row) => {
+  const handleDelete = (row) => {
     setSelectedProduct(row)
     setDeleteModalOpen(true)
   }
@@ -50,6 +51,26 @@ export const Products = () => {
     setSelectedProduct(null)
     setIsOpen(true)
   }
+
+  const onClose = () => setIsOpen(false)
+
+  const isEdit = Boolean(selectedProduct);
+
+  const handleProductSubmit = (data) => {
+    const payload = {
+      ...data,
+      price: parseFloat(data.price) || 0,
+      stock: Number(data.stock) || 0,
+    };
+  
+    if (isEdit) {
+      dispatch(updateProduct({ id: selectedProduct.id, data: payload }));
+    } else {
+      dispatch(createProduct(payload));
+    }
+  
+    onClose();
+  };
 
   const columns = [
     {
@@ -103,11 +124,6 @@ export const Products = () => {
       ),
     },
     {
-      key: 'createdAt',
-      label: 'Created',
-      render: (row) => formatDate(row.createdAt),
-    },
-    {
       key: 'actions',
       label: 'Actions',
       render: (row) => (
@@ -115,7 +131,7 @@ export const Products = () => {
           row={row}
           onView={handleView}
           onEdit={handleEdit}
-          onDelete={handleDeleteClick} // open modal
+          onDelete={handleDelete}
         />
       ),
     },
@@ -132,7 +148,13 @@ export const Products = () => {
 
       {/* Product Form Modal */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} title="Product">
-        <ProductForm initialData={selectedProduct} onClose={() => setIsOpen(false)} />
+      <ProductForm
+  config={ProductConfigForm}
+  initialData={selectedProduct}
+  onSubmit={handleProductSubmit}
+  onClose={onClose}
+  submitLabel={isEdit ? "Update Product" : "Create Product"}
+/>
       </Modal>
 
       {/* Generic Delete Confirmation Modal */}

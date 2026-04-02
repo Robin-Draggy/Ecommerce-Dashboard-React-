@@ -12,7 +12,7 @@ export const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, entityName
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 rounded-lg border text-gray-600 hover:bg-gray-100"
+            className="px-4 py-2 rounded-lg border text-cl-primary hover:scale-105 duration-300 transition-ease cursor-pointer"
           >
             Cancel
           </button>
@@ -22,7 +22,7 @@ export const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, entityName
               onConfirm();
               onClose();
             }}
-            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+            className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 hover:scale-105 duration-300 transition-ease cursor-pointer"
           >
             Delete
           </button>
