@@ -41,6 +41,7 @@ export const TableActions = ({ row, onEdit, onDelete, onView, customActions = []
       )}
       {customActions.map((action, index) => (
         <button
+          type='button'
           key={index}
           onClick={handleClick(action.onClick)}
           className="p-2 rounded-full hover:bg-sidebar-cl text-cl-primary transition-colors cursor-pointer"

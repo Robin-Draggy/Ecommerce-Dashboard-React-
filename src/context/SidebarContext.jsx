@@ -3,42 +3,60 @@ import { createContext, useContext, useEffect, useState } from "react";
 const SidebarContext = createContext();
 
 const MOBILE_BREAKPOINT = 768;
+const STORAGE_KEY = "sidebar_state";
 
-// CRAETING PROVIDER
-export const SidebarProvider = ({children}) => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+export const SidebarProvider = ({ children }) => {
+  const [isMobile, setIsMobile] = useState(
+    () => window.innerWidth < MOBILE_BREAKPOINT
+  );
 
+  const [isOpen, setIsOpen] = useState(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? JSON.parse(saved) : true;
+  });
+
+  // ✅ Handle resize properly
   useEffect(() => {
-    const checkScreen = () => {
-      setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+    const handleResize = () => {
+      const mobile = window.innerWidth < MOBILE_BREAKPOINT;
+      setIsMobile(mobile);
+
+      if (mobile) {
+        setIsOpen(false);
+      } else {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        setIsOpen(saved ? JSON.parse(saved) : true);
+      }
     };
 
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-
-    return () => window.removeEventListener("resize", checkScreen);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-    const toggleSidebar = () => {
-        setIsOpen((prev) => !prev)
+  // ✅ Persist only on desktop
+  useEffect(() => {
+    if (!isMobile) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(isOpen));
     }
+  }, [isOpen, isMobile]);
 
-    const value = {
+  const toggleSidebar = () => setIsOpen((prev) => !prev);
+  const openSidebar = () => setIsOpen(true);
+  const closeSidebar = () => setIsOpen(false);
+
+  return (
+    <SidebarContext.Provider
+      value={{
         isOpen,
+        isMobile,
         toggleSidebar,
-        isMobile
-    }
+        openSidebar,
+        closeSidebar,
+      }}
+    >
+      {children}
+    </SidebarContext.Provider>
+  );
+};
 
-    return (
-        <SidebarContext.Provider value={value}>
-            {children}
-        </SidebarContext.Provider>
-    )
-}
-
-
-// CUSTOM HOOK
-export const useSidebar = () => {
-    return useContext(SidebarContext)
-}
+export const useSidebar = () => useContext(SidebarContext);

@@ -2,108 +2,84 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { routeConfig } from "../../routes/routeConfig";
 import { useSidebar } from "../../context/SidebarContext";
+import { useMemo } from "react";
 
 export const Sidebar = () => {
   const { user } = useAuth();
-  const { isOpen, isMobile } = useSidebar();
+  const { isOpen, isMobile, closeSidebar } = useSidebar();
+
+  const allowedRoutes = useMemo(() => {
+    if (!user) return [];
+
+    const dashboardRoute = routeConfig.find(
+      (route) => route.path === "/dashboard"
+    );
+
+    return (dashboardRoute?.children || []).filter(
+      (route) =>
+        route.meta && route.meta.roles.includes(user.role)
+    );
+  }, [user]);
 
   if (!user) return null;
 
   const expanded = !isMobile && isOpen;
 
-  const dashboardRoute = routeConfig.find((route) => route.path === "/dashboard");
-  const dashboardRoutes = dashboardRoute?.children || [];
-
-  const allowedRoutes = dashboardRoutes.filter((route) => {
-    if (!route.meta) return false;
-    return route.meta.roles.includes(user.role);
-  });
-
   return (
     <aside
-      className={`
-        bg-cl-primary
-        h-screen
-        px-2 py-2.5
-        rounded-lg
-        space-y-3
-        transition-all duration-300
-        ${expanded ? "w-64" : "w-16"}
-      `}
-    >
-      {allowedRoutes.map((route) => {
-        const path = route.index ? "/dashboard" : `/dashboard/${route.path}`;
+  className={`
+    bg-cl-primary h-screen rounded-lg
+    flex flex-col gap-2 p-2
+    transition-[width] duration-300 ease-in-out
+    ${expanded ? "w-64" : "w-16"}
+  `}
+>
+  {allowedRoutes.map((route) => {
+    const path = route.index
+      ? "/dashboard"
+      : `/dashboard/${route.path}`;
 
-        return (
-          <NavLink key={path} to={path} end={route.index}>
-            {({ isActive }) => (
-              <div
+    return (
+      <NavLink
+        key={path}
+        to={path}
+        end={route.index}
+        onClick={() => isMobile && closeSidebar()}
+      >
+        {({ isActive }) => (
+          <div
+            className={`
+              flex items-center rounded-lg px-2 py-2
+              transition-colors duration-200
+              ${isActive ? "bg-sidebar-cl text-cl-primary" : "hover:bg-gray-100"}
+            `}
+          >
+            {/* ICON */}
+            <span className="flex items-center justify-center w-10 shrink-0">
+              {route.meta.icon}
+            </span>
+
+            {/* TEXT WRAPPER (important) */}
+            <div className="overflow-hidden">
+              <span
                 className={`
-                  p-2 rounded-lg transition-all duration-200
+                  block whitespace-nowrap
+                  transition-all duration-200 ease-out
                   ${
-                    !isMobile && expanded && isActive
-                      ? "bg-sidebar-cl text-cl-primary"
-                      : "hover:bg-gray-100 hover:text-gray-900 text-cl-primary"
+                    expanded
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 -translate-x-3"
                   }
                 `}
               >
-                {/* MOBILE DESIGN */}
-                {isMobile ? (
-                  <div className="flex flex-col items-center gap-1">
-
-                    {/* ICON */}
-                    <span
-                      className={`
-                        p-2 rounded-full transition-all
-                        ${isActive ? "bg-sidebar-cl" : ""}
-                      `}
-                    >
-                      {route.meta.icon}
-                    </span>
-
-                    {/* TITLE */}
-                    <span className="text-xs text-center">
-                      {route.meta.title}
-                    </span>
-
-                  </div>
-                ) : (
-                  /* DESKTOP DESIGN */
-                  <div
-                    className={`
-                      flex items-center
-                      ${expanded ? "gap-3" : "justify-center"}
-                    `}
-                  >
-
-                    {/* ICON */}
-                    <span className={`${!expanded ? "p-2 rounded-md" : ""}`}>
-                      {route.meta.icon}
-                    </span>
-
-                    {/* TITLE */}
-                    <span
-                      className={`
-                        whitespace-nowrap
-                        transition-all duration-300
-                        origin-left
-                        ${
-                          expanded
-                            ? "scale-100 opacity-100"
-                            : "scale-0 opacity-0 w-0"
-                        }
-                      `}
-                    >
-                      {route.meta.title}
-                    </span>
-
-                  </div>
-                )}
-              </div>
-            )}
-          </NavLink>
-        );
-      })}
-    </aside>
+                {route.meta.title}
+              </span>
+            </div>
+          </div>
+        )}
+      </NavLink>
+    );
+  })}
+</aside>
   );
 };

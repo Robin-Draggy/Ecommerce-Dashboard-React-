@@ -4,7 +4,6 @@ export const CategoryConfigForm = [
     { name: "productCount", label: "Product Count", type: "number" },
     { name: "image", label: "Category Image", type: "file" },
     { name: "description", label: "Description", type: "textarea" },
-    { name: "isActive", label: "Active Status", type: "checkbox" },
     { name: "parentCategory", label: "Parent Category", type: "select", options: [] },
     { name: "metaTitle", label: "Meta Title", type: "text" },
     { name: "metaDescription", label: "Meta Description", type: "textarea" },

@@ -31,6 +31,34 @@
       "rating": "3.4",
       "reviews": "234",
       "id": "7M1_dAB0GZ8"
+    },
+    {
+      "name": "Samsung s20",
+      "price": 5670,
+      "cost": "123",
+      "stock": 454,
+      "brand": "samsung",
+      "category": "Phone",
+      "sku": "SM-HP-003",
+      "description": "a good phone",
+      "images": {},
+      "rating": "4",
+      "reviews": "23",
+      "id": "tYml01zpYQo"
+    },
+    {
+      "name": "Mouse",
+      "price": 230,
+      "cost": "180",
+      "stock": 200,
+      "brand": "ACI",
+      "category": "Electronics",
+      "sku": "SM-HP-004",
+      "description": "a good mouse",
+      "images": {},
+      "rating": "3",
+      "reviews": "120",
+      "id": "nDzEupQ3tuM"
     }
   ],
   "orders": [
