@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
 import { FormRenderer } from "../ui/FormRenderer";
+import { useForm } from "react-hook-form"
 
 export const ProductForm = ({
   config,

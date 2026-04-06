@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getInventoriesAPI, deleteInventoryAPI } from './InventoriesApi'
+import { getInventoriesAPI, deleteInventoryAPI } from './InventoriesAPI';
 
 export const getInventories = createAsyncThunk(
     'inventory/getInventories',
